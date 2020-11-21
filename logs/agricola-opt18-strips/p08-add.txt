@@ -1,0 +1,22 @@
+[t=10.3365s, 106996 KB] Plan length: 86 step(s).
+[t=10.3365s, 106996 KB] Plan cost: 1620
+[t=10.3365s, 106996 KB] Expanded 6802 state(s).
+[t=10.3365s, 106996 KB] Reopened 0 state(s).
+[t=10.3365s, 106996 KB] Evaluated 8129 state(s).
+[t=10.3365s, 106996 KB] Evaluations: 8129
+[t=10.3365s, 106996 KB] Generated 18768 state(s).
+[t=10.3365s, 106996 KB] Dead ends: 51 state(s).
+[t=10.3365s, 106996 KB] Expanded until last jump: 0 state(s).
+[t=10.3365s, 106996 KB] Reopened until last jump: 0 state(s).
+[t=10.3365s, 106996 KB] Evaluated until last jump: 1 state(s).
+[t=10.3365s, 106996 KB] Generated until last jump: 0 state(s).
+[t=10.3365s, 106996 KB] Number of registered states: 8129
+[t=10.3365s, 106996 KB] Int hash set load factor: 8129/16384 = 0.496155
+[t=10.3365s, 106996 KB] Int hash set resizes: 14
+[t=10.3365s, 106996 KB] Search time: 9.91997s
+[t=10.3365s, 106996 KB] Total time: 10.3365s
+Solution found.
+Peak memory: 106996 KB
+Remove intermediate file output.sas
+search exit code: 0
+
