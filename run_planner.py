@@ -7,6 +7,7 @@ import argparse
 from tqdm import tqdm
 import pandas as pd
 import re
+from math import ceil
 heuristic = domains = ""
 client = docker.from_env()
 
@@ -91,7 +92,7 @@ def run_container():
 def main():
     global heuristic, domains
     domains_directory = os.path.join(os.path.dirname(__file__), "domains")
-    heuristic, domains = parse_args()
+    heuristic, domains, selective = parse_args()
     with open(out_file, "w+") as file:
         file.write(",".join(csv_headers)+"\n")
     if heuristic == "*":
@@ -102,12 +103,12 @@ def main():
         for domain in domains.split(","):
             domain_target = os.path.join(domains_directory,
                                          os.path.basename(domain))
-            plan(heuristic, domain_target)
+            plan(heuristic, domain_target, selective)
     else:
         for domain in tqdm(os.listdir(domains_directory)):
             domain_target = os.path.join(domains_directory,
                                          os.path.basename(domain))
-            plan(heuristic, domain_target)
+            plan(heuristic, domain_target, selective)
 
 
 def parse_args():
@@ -116,21 +117,34 @@ def parse_args():
                         help="Heuristic to run. Use * for ALL", default="*")
     parser.add_argument(
         "--domains", '-d', help="Domains to run, separated by commas. Use * for ALL.", default="*")
+    parser.add_argument(
+        "--selective", "-s", help="By enabling the selective flag, the program will only look at 3 problems per domain (easy, medium and hard)", default=False, action='store_true')
     args = parser.parse_args()
-    return args.heuristic, args.domains
+    return args.heuristic, args.domains, args.selective
 
 
-def plan(heuristics, domain_directory):
+def plan(heuristics, domain_directory, selective):
     domain_name = os.path.basename(domain_directory)
     domain_log_folder = os.path.join(
         logs_dir, domain_name)
+    files = os.listdir(domain_directory)
+    digits = {file: re.findall(
+        r'\d+', os.path.basename(file)) for file in files}
+    for k in digits:
+        if "domain" in k:
+            digits[k] = [0]
+    files = sorted(files, key=lambda file: int(digits[file][0]))
+    first_file, middle_file, last_file = files[1], files[(
+        ceil(len(files)/2))-1], files[-1]
     if not os.path.exists(domain_log_folder):
         os.mkdir(domain_log_folder)
-    for file in tqdm(os.listdir(domain_directory)):
+    for file in tqdm(files):
         abs_file = os.path.join(domain_directory, file)
         if "domain" in file:
             copy_domain(abs_file)
         else:
+            if selective and os.path.basename(file) not in [first_file, middle_file, last_file]:
+                continue
             copy_problem(abs_file)
             for heuristic in heuristics:
                 render_template(heuristic)

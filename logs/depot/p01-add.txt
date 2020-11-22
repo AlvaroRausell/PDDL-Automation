@@ -19,3 +19,4 @@ Solution found.
 Peak memory: 56124 KB
 Remove intermediate file output.sas
 search exit code: 0
+
