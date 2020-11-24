@@ -53,14 +53,14 @@ def copy_domain(domain):
     copy_to_docker(domain, "domain.pddl")
 
 
-def render_template(heuristic):
+def render_template(heuristic, time_limit):
     template_file = os.path.join(docker_dir, "student.Dockerfile.jinja")
     output_file = os.path.join(docker_dir, "student.Dockerfile")
     content = ""
     with open(template_file, "r") as file:
         content = file.read()
     template = jinja2.Template(content)
-    content = template.render(heuristic=heuristic)
+    content = template.render(heuristic=heuristic, time_limit=time_limit)
     with open(output_file, "w+") as file:
         file.write(content)
 
@@ -92,7 +92,7 @@ def run_container():
 def main():
     global heuristic, domains
     domains_directory = os.path.join(os.path.dirname(__file__), "domains")
-    heuristic, domains, selective = parse_args()
+    heuristic, domains, int(time_limit), selective = parse_args()
     with open(out_file, "w+") as file:
         file.write(",".join(csv_headers)+"\n")
     if heuristic == "*":
@@ -103,12 +103,12 @@ def main():
         for domain in domains.split(","):
             domain_target = os.path.join(domains_directory,
                                          os.path.basename(domain))
-            plan(heuristic, domain_target, selective)
+            plan(heuristic, domain_target, selective, time_limit)
     else:
         for domain in tqdm(os.listdir(domains_directory)):
             domain_target = os.path.join(domains_directory,
                                          os.path.basename(domain))
-            plan(heuristic, domain_target, selective)
+            plan(heuristic, domain_target, selective, time_limit)
 
 
 def parse_args():
@@ -118,12 +118,14 @@ def parse_args():
     parser.add_argument(
         "--domains", '-d', help="Domains to run, separated by commas. Use * for ALL.", default="*")
     parser.add_argument(
+        "--time_limit", '-l', help="Time limit expressed in [number]m format (eg. 10m)", default="30m")
+    parser.add_argument(
         "--selective", "-s", help="By enabling the selective flag, the program will only look at 3 problems per domain (easy, medium and hard)", default=False, action='store_true')
     args = parser.parse_args()
-    return args.heuristic, args.domains, args.selective
+    return args.heuristic, args.domains, args.time_limit, args.selective
 
 
-def plan(heuristics, domain_directory, selective):
+def plan(heuristics, domain_directory, selective, time_limit):
     domain_name = os.path.basename(domain_directory)
     domain_log_folder = os.path.join(
         logs_dir, domain_name)
@@ -147,7 +149,7 @@ def plan(heuristics, domain_directory, selective):
                 continue
             copy_problem(abs_file)
             for heuristic in heuristics:
-                render_template(heuristic)
+                render_template(heuristic, time_limit)
                 build_container()
                 try:
                     print(

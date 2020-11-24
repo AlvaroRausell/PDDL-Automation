@@ -7,7 +7,7 @@ COPY . /src
 WORKDIR /src
 
 #Run the domain.pddl and problem.pddl in this folder on optic
-CMD /bin/fd --overall-time-limit 15m --plan-file plan.txt ./domain.pddl ./problem.pddl --search "astar(add())" 
+CMD /bin/fd --overall-time-limit 15m --plan-file plan.txt ./domain.pddl ./problem.pddl --search "astar(cg())" 
 
 #Other software available is
 # - fd
