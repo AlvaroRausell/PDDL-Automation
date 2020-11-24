@@ -1,13 +1,5 @@
 instance,domain,heuristic,plan_length,plan_cost,states_expanded,states_reopened,states_evaluated,evaluations,states_generated,dead_ends,states_expanded_ulj,states_reopened_ulj,states_evaluated_ulj,states_generated_ulj,registered_states,hash_set_load_factor,hash_set_resizes,search_time,total_time,peak_memory
-gripper - prob01.pddl,gripper,add,13,13,88,0,156,156,334,0,80,0,134,304,156,0.609375,8,0.0,0.0,56124
-gripper - prob01.pddl,gripper,cg,13,13,110,22,156,156,396,0,102,22,134,366,156,0.609375,8,0.0,0.0040142,56124
-gripper - prob10.pddl,gripper,add,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
-gripper - prob10.pddl,gripper,cg,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
-gripper - prob20.pddl,gripper,add,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
-gripper - prob20.pddl,gripper,cg,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
-rovers - p01.pddl,rovers,add,10,10,13,0,49,49,75,0,4,0,22,26,49,0.765625,6,0.0068372,0.0068372,56124
-rovers - p01.pddl,rovers,cg,10,10,32,0,93,93,195,0,28,0,86,174,93,0.726562,7,0.0,0.0,56124
-rovers - p20.pddl,rovers,add,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
-rovers - p20.pddl,rovers,cg,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
-rovers - p40.pddl,rovers,add,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
-rovers - p40.pddl,rovers,cg,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF,DNF
+depot - p01.pddl,depot,add,10,10,11,0,53,53,65,0,0,0,1,0,53,0.828125,6,0.0,0.0062531,56124
+depot - p01.pddl,depot,cg,11,11,69,2,158,158,422,0,60,2,138,372,158,0.617188,8,0.0074192,0.0074192,57296
+depot - p02.pddl,depot,add,16,16,19,0,108,108,138,0,0,0,1,0,108,0.84375,7,0.0,0.0032383,56268
+depot - p02.pddl,depot,cg,15,15,67,0,281,281,491,0,32,0,111,224,281,0.548828,9,0.0,0.0092236,69844

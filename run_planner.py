@@ -92,7 +92,8 @@ def run_container():
 def main():
     global heuristic, domains
     domains_directory = os.path.join(os.path.dirname(__file__), "domains")
-    heuristic, domains, int(time_limit), selective = parse_args()
+    heuristic, domains, time_limit, selective = parse_args()
+
     with open(out_file, "w+") as file:
         file.write(",".join(csv_headers)+"\n")
     if heuristic == "*":
